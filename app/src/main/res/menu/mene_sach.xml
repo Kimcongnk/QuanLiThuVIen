@@ -1,0 +1,32 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item
+            android:id="@+id/khoan_thu"
+            android:icon="@android:drawable/arrow_down_float"
+            android:title="Quản lí phiếu mượn" />
+        <item
+            android:id="@+id/khoan_chi"
+            android:icon="@android:drawable/arrow_down_float"
+            android:title="Quản lí sách" />
+        <item
+            android:id="@+id/thong_ke"
+            android:icon="@android:drawable/arrow_down_float"
+            android:title="Quản lí sách" />
+    </group>
+<group>
+    <item
+        android:title="10 Sách mượn nhiều nhất" />
+    <item
+        android:title="Doanh thu" />
+</group>
+    <group>
+        <item
+            android:id="@+id/gioi_thieu"
+            android:title="Đổi mật khẩu" />
+
+        <item
+            android:title="Đăng xuất"
+            android:id="@+id/thoat"/>
+    </group>
+</menu>

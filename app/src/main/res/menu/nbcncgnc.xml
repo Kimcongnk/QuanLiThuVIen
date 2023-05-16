@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/quan_li_phieu_muon"
+            android:icon="@android:drawable/arrow_down_float"
+            android:title="Quản lí phiếu mượn" />
+        <item
+            android:id="@+id/quan_li_loai_sach"
+            android:icon="@android:drawable/arrow_down_float"
+            android:title="Quản lí loại sách" />
+        <item
+            android:id="@+id/quan_li_sach"
+            android:icon="@android:drawable/arrow_down_float"
+            android:title="Quản lí sách" />
+        <item
+            android:id="@+id/quan_li_thanh_vien"
+            android:icon="@android:drawable/arrow_down_float"
+            android:title="Quản lí thành viên" />
+
+    </group>
+    <item android:title="Thống Kê">
+    <menu>
+        <item
+            android:id="@+id/top10_sach"
+            android:title="10 Sách mượn nhiều nhất"
+            android:icon="@android:drawable/arrow_down_float"/>
+        <item
+            android:id="@+id/doanh_thu"
+            android:title="Doanh thu"
+            android:icon="@android:drawable/arrow_down_float"/>
+    </menu>
+
+    </item>
+
+    <item android:title="Action">
+        <menu>
+            <item android:title="Đổi mật khẩu"
+                android:id="@+id/doi_mat_khau"
+                android:icon="@android:drawable/arrow_down_float"
+                >
+
+            </item>
+            <item android:title="Đăng xuất"
+                android:icon="@android:drawable/arrow_down_float"
+                >
+
+            </item>
+
+        </menu>
+
+    </item>
+
+</menu>
