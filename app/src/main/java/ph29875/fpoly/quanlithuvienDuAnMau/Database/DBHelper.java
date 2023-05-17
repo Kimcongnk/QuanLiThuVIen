@@ -7,37 +7,48 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
-    private static final String DB_NAME = "data";
+    private static final String DB_NAME = "phuongnamlib.db";
     private static final int DB_VERSION = 1;
 
-    public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    public DBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(TABLE_THU_THU_CREATE);
+        //Thanh Vien
+        db.execSQL(TABLE_THANH_VIEN_CREATE);
+        //Loai Sach
+        db.execSQL(TABLE_LOAI_SACH_CREATE);
+        //Sach
+        db.execSQL(TABLE_SACH_CREATE);
+        //Phieu Muon
+        db.execSQL(TABLE_PHIEU_MUON_CREATE);
     }
-    public static final String TABLE_THU_THU_CREATE = "CREATE TABLE " +
+    public static final String TABLE_THU_THU_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_thuThu (" +
-            "thuThu_id TEXT PRIMARY KEY AUTOINCREMENT, " +
+            "thuThu_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "thuThu_hoTen TEXT NOT NULL," +
             "thuThu_matKhau TEXT NOT NULL" +
             ")";
-    public static final String TABLE_THANH_VIEN_CREATE = "CREATE TABLE " +
+    public static final String TABLE_THANH_VIEN_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_thanhVien (" +
             "thanhVien_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "thanhVien_hoTen TEXT NOT NULL," +
             "thanhVien_namSinh TEXT NOT NULL" +
             ")";
-    public static final String TABLE_LOAI_SACH_CREATE = "CREATE TABLE " +
+    public static final String TABLE_LOAI_SACH_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_loaiSach (" +
             "loaiSach_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "loaiSach_tenLoai TEXT NOT NULL" +
             ")";
-    public static final String TABLE_SACH_CREATE = "CREATE TABLE " +
+    public static final String TABLE_SACH_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_Sach (" +
             "Sach_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "Sach_tenSach TEXT NOT NULL," +
             "Sach_giaThue TEXT NOT NULL," +
             "loaiSach_id INTEGER REFERENCES tbl_loaiSach(loaiSach_id)" +
             ")";
-    public static final String TABLE_PHIEU_MUON_CREATE = "CREATE TABLE " +
+    public static final String TABLE_PHIEU_MUON_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_phieuMuon (" +
             "phieuMuon_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "thuThu_id TEXT REFERENCES tbl_thuThu(thuThu_id)," +
@@ -51,6 +62,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         //Thu Thu
         db.execSQL(TABLE_THU_THU_CREATE);
         //Thanh Vien
