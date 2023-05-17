@@ -1,4 +1,4 @@
-package ph29875.fpoly.quanlithuvienDuAnMau;
+package ph29875.fpoly.quanlithuvienDuAnMau.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+
+import ph29875.fpoly.quanlithuvienDuAnMau.R;
 
 /**
  * A simple {@link Fragment} subclass.
