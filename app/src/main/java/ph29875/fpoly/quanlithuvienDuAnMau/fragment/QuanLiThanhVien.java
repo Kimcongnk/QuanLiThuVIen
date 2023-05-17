@@ -1,27 +1,28 @@
-package ph29875.fpoly.quanlithuvienDuAnMau;
+package ph29875.fpoly.quanlithuvienDuAnMau.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
+import ph29875.fpoly.quanlithuvienDuAnMau.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link QuanLiPhieuMuon#newInstance} factory method to
+ * Use the {@link QuanLiThanhVien#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class QuanLiPhieuMuon extends Fragment {
+public class QuanLiThanhVien extends Fragment {
 
 
-    public QuanLiPhieuMuon() {
+    public QuanLiThanhVien() {
         // Required empty public constructor
     }
 
-    public static QuanLiPhieuMuon newInstance() {
-QuanLiPhieuMuon quanLiPhieuMuon = new QuanLiPhieuMuon();
+    public static QuanLiThanhVien newInstance() {
+QuanLiThanhVien quanLiPhieuMuon = new QuanLiThanhVien();
 
         return quanLiPhieuMuon;
     }
@@ -36,6 +37,6 @@ QuanLiPhieuMuon quanLiPhieuMuon = new QuanLiPhieuMuon();
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_quan_li_phieu_muon, container, false);
+        return inflater.inflate(R.layout.fragment_quan_li_thanh_vien, container, false);
     }
 }

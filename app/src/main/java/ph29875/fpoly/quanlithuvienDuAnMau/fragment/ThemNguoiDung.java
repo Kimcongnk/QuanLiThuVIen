@@ -1,4 +1,4 @@
-package ph29875.fpoly.quanlithuvienDuAnMau;
+package ph29875.fpoly.quanlithuvienDuAnMau.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,20 +7,22 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import ph29875.fpoly.quanlithuvienDuAnMau.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DoiMatKhau#newInstance} factory method to
+ * Use the {@link ThemNguoiDung#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DoiMatKhau extends Fragment {
+public class ThemNguoiDung extends Fragment {
 
 
-    public DoiMatKhau() {
+    public ThemNguoiDung() {
         // Required empty public constructor
     }
 
-    public static DoiMatKhau newInstance() {
-DoiMatKhau quanLiPhieuMuon = new DoiMatKhau();
+    public static ThemNguoiDung newInstance() {
+ThemNguoiDung quanLiPhieuMuon = new ThemNguoiDung();
 
         return quanLiPhieuMuon;
     }
@@ -35,6 +37,6 @@ DoiMatKhau quanLiPhieuMuon = new DoiMatKhau();
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_doi_mat_khau, container, false);
+        return inflater.inflate(R.layout.fragment_them_nguoi_dung, container, false);
     }
 }
