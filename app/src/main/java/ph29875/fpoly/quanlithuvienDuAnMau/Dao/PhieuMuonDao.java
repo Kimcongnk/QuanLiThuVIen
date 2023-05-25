@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import ph29875.fpoly.quanlithuvienDuAnMau.Database.DBHelper;
@@ -32,12 +34,12 @@ public class PhieuMuonDao {
 
     public long insertPhieuMuon(PhieuMuon phieuMuon) {
         ContentValues values = new ContentValues();
-        values.put("thuThu_id", phieuMuon.getMaTT());
         values.put("thanhVien_id", phieuMuon.getMaTV());
         values.put("Sach_id", phieuMuon.getMaSach());
         values.put("phieuMuon_tienThue", phieuMuon.getTienThue());
         values.put("phieuMuon_ngay", phieuMuon.getNgay().toString());
         values.put("phieuMuon_traSach", phieuMuon.getTraSach());
+        open();
         return database.insert("tbl_phieuMuon", null, values);
     }
 
@@ -56,9 +58,40 @@ public class PhieuMuonDao {
         return database.delete("tbl_phieuMuon", "phieuMuon_id = ?", new String[]{String.valueOf(phieuMuon.getMaPM())});
     }
 
-    public Cursor getAllPhieuMuon() {
-        return database.query("tbl_phieuMuon", null, null, null, null, null, null);
+    @SuppressLint("Range")
+
+    public List<PhieuMuon> getAllPhieuMuon() {
+        List<PhieuMuon> phieuMuonList = new ArrayList<>();
+        String selectQuery = "SELECT * FROM tbl_phieuMuon";
+        Cursor cursor = database.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                PhieuMuon phieuMuon = new PhieuMuon();
+                phieuMuon.setMaPM(cursor.getInt(cursor.getColumnIndex("phieuMuon_id")));
+                phieuMuon.setMaTT(cursor.getString(cursor.getColumnIndex("thuThu_id")));
+                phieuMuon.setMaTV(cursor.getInt(cursor.getColumnIndex("thanhVien_id")));
+                phieuMuon.setMaSach(cursor.getInt(cursor.getColumnIndex("Sach_id")));
+                phieuMuon.setTienThue(cursor.getInt(cursor.getColumnIndex("phieuMuon_tienThue")));
+                // Parse the date from the cursor
+                String dateStr = cursor.getString(cursor.getColumnIndex("phieuMuon_ngay"));
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                try {
+                    Date date = dateFormat.parse(dateStr);
+                    phieuMuon.setNgay(String.valueOf(date));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                phieuMuon.setTraSach(cursor.getInt(cursor.getColumnIndex("phieuMuon_traSach")));
+
+                phieuMuonList.add(phieuMuon);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return phieuMuonList;
     }
+
 
     @SuppressLint("Range")
     public PhieuMuon getPhieuMuonById(int maPM) {
@@ -79,7 +112,7 @@ public class PhieuMuonDao {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             try {
                 Date date = dateFormat.parse(dateStr);
-                phieuMuon.setNgay(date);
+                phieuMuon.setNgay(String.valueOf(date));
             } catch (ParseException e) {
                 e.printStackTrace();
             }

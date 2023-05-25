@@ -2,30 +2,34 @@ package ph29875.fpoly.quanlithuvienDuAnMau.Dao;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ph29875.fpoly.quanlithuvienDuAnMau.Database.DBHelper;
 import ph29875.fpoly.quanlithuvienDuAnMau.Model.LoaiSach;
 
 public class LoaiSachDao {
     private SQLiteDatabase database;
-
-    public LoaiSachDao(SQLiteDatabase database) {
-        this.database = database;
+    private Context context;
+    public LoaiSachDao(Context context) {
+        DBHelper databaseHelper = new DBHelper(context);
+        this.database = databaseHelper.getWritableDatabase();
+        this.context = context;
     }
 
     public long addLoaiSach(LoaiSach loaiSach) {
         ContentValues values = new ContentValues();
-        values.put("tenLoai", loaiSach.getTenLoai());
+        values.put("loaiSach_tenLoai", loaiSach.getTenLoai());
         return database.insert("tbl_loaiSach", null, values);
     }
 
     public int updateLoaiSach(LoaiSach loaiSach) {
         ContentValues values = new ContentValues();
-        values.put("tenLoai", loaiSach.getTenLoai());
+        values.put("loaiSach_tenLoai", loaiSach.getTenLoai());
         String whereClause = "loaiSach_id = ?";
         String[] whereArgs = {String.valueOf(loaiSach.getMaLoai())};
         return database.update("tbl_loaiSach", values, whereClause, whereArgs);

@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add PhieuMuon"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/etMaTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="MaTV"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/etMaSach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="MaSach"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/etTienThue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="TienThue"
+        android:inputType="numberDecimal"/>
+
+    <EditText
+        android:id="@+id/etNgay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ngay"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/etTraSach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="TraSach"
+        android:inputType="text"/>
+
+</LinearLayout>
