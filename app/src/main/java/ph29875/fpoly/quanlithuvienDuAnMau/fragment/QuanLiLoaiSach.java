@@ -33,6 +33,7 @@ public class QuanLiLoaiSach extends Fragment {
 private LoaiSachDao loaiSachDao ;
 private ArrayList<LoaiSach> loaiSachArrayList = new ArrayList<>();
 private LoaiSachAdapter loaiSachAdapter;
+private RecyclerView recyclerView;
 
     public QuanLiLoaiSach() {
         // Required empty public constructor
@@ -51,24 +52,27 @@ QuanLiLoaiSach quanLiPhieuMuon = new QuanLiLoaiSach();
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        loaiSachArrayList = (ArrayList<LoaiSach>) loaiSachDao.getAllLoaiSach();
+        // Create and set the adapter
+        loaiSachAdapter = new LoaiSachAdapter(getContext(), loaiSachArrayList);
+        recyclerView.setAdapter(loaiSachAdapter);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_quan_li_loai_sach, container, false);
         FloatingActionButton floatingActionButton = view.findViewById(R.id.floatingActionButton);
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+         recyclerView = view.findViewById(R.id.recyclerView);
         loaiSachDao = new LoaiSachDao(getContext());
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
 
-        recyclerView.setLayoutManager(layoutManager);
-
-
-        loaiSachArrayList = (ArrayList<LoaiSach>) loaiSachDao.getAllLoaiSach();
-
-        // Create and set the adapter
-        loaiSachAdapter = new LoaiSachAdapter(getContext(), loaiSachArrayList);
-        recyclerView.setAdapter(loaiSachAdapter);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +97,7 @@ QuanLiLoaiSach quanLiPhieuMuon = new QuanLiLoaiSach();
                        loaiSach.setTenLoai(tenLoaiEditText.getText().toString());
 
                         if (loaiSachDao.addLoaiSach(loaiSach) > 0) {
+                            onResume();
                             // Thêm thành công
                             Toast.makeText(getContext(), "Thêm Loại Sách thành công", Toast.LENGTH_SHORT).show();
                         } else {

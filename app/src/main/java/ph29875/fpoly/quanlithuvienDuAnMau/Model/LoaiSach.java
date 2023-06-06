@@ -1,17 +1,17 @@
 package ph29875.fpoly.quanlithuvienDuAnMau.Model;
 
 public class LoaiSach {
-    private String maLoai;
+    private int maLoai;
    private String tenLoai;
 
     public LoaiSach() {
     }
 
-    public String getMaLoai() {
+    public int getMaLoai() {
         return maLoai;
     }
 
-    public void setMaLoai(String maLoai) {
+    public void setMaLoai(int maLoai) {
         this.maLoai = maLoai;
     }
 

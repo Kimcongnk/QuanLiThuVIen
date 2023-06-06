@@ -6,7 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
+import ph29875.fpoly.quanlithuvienDuAnMau.Adapter.AdapterTopSach;
+import ph29875.fpoly.quanlithuvienDuAnMau.Dao.ThongKeDAO;
+import ph29875.fpoly.quanlithuvienDuAnMau.Model.Sach;
 import ph29875.fpoly.quanlithuvienDuAnMau.R;
 
 /**
@@ -16,7 +23,10 @@ import ph29875.fpoly.quanlithuvienDuAnMau.R;
  */
 public class Top10Sach extends Fragment {
 
-
+    AdapterTopSach adapterTopSach;
+    ArrayList<Sach> listtop;
+    RecyclerView recyclerView;
+    ThongKeDAO thongKeDAO;
     public Top10Sach() {
         // Required empty public constructor
     }
@@ -37,6 +47,14 @@ Top10Sach quanLiPhieuMuon = new Top10Sach();
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_top10_sach, container, false);
+        View view = inflater.inflate(R.layout.fragment_top10_sach, container, false);
+        recyclerView = view.findViewById(R.id.recyclerView);
+        thongKeDAO = new ThongKeDAO(getContext());
+        listtop = (ArrayList<Sach>) thongKeDAO.getTop();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        adapterTopSach = new AdapterTopSach(getContext(),listtop);
+        recyclerView.setAdapter(adapterTopSach);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        return view;
     }
 }

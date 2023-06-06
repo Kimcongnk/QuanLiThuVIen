@@ -18,7 +18,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextText4" />
 
     <EditText
-        android:id="@+id/editTextText3"
+        android:id="@+id/ten"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="193dp"
         android:text="Mật khẩu cũ"
-        app:layout_constraintStart_toStartOf="@+id/editTextText3"
+        app:layout_constraintStart_toStartOf="@+id/ten"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -67,7 +67,7 @@
         android:layout_marginTop="43dp"
         android:text="Mật khẩu mới"
         app:layout_constraintStart_toStartOf="@+id/editTextText7"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText3" />
+        app:layout_constraintTop_toBottomOf="@+id/ten" />
 
     <TextView
         android:id="@+id/textView7"
@@ -95,4 +95,5 @@
         android:text="Đăng nhập"
         app:layout_constraintStart_toStartOf="@+id/button3"
         app:layout_constraintTop_toBottomOf="@+id/editTextText4" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

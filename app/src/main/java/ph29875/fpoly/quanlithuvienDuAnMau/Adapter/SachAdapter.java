@@ -34,9 +34,9 @@ private Context context;
     @Override
     public void onBindViewHolder(@NonNull SachViewHolder holder, int position) {
         Sach sach = sachList.get(position);
-        holder.tenSachTextView.setText(sach.getTenSach());
-        holder.giaThueTextView.setText(String.valueOf(sach.getGiaThue()));
-        holder.maLoaiTextView.setText(String.valueOf(sach.getMaLoai()));
+        holder.tenSachTextView.setText("Tên sách: "+sach.getTenSach());
+        holder.giaThueTextView.setText("Giá thuê: " +String.valueOf(sach.getGiaThue()));
+        holder.maLoaiTextView.setText("Mã loại: "+String.valueOf(sach.getMaLoai()));
     }
 
     @Override

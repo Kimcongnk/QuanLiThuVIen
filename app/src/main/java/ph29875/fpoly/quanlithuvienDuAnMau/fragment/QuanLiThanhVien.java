@@ -53,13 +53,8 @@ QuanLiThanhVien quanLiThanhVien = new QuanLiThanhVien();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_quan_li_thanh_vien, container, false);
-        FloatingActionButton floatingActionButton = view.findViewById(R.id.floatingActionButton);
-        recyclerView = view.findViewById(R.id.recyclerView);
-        thanhVienDao = new ThanhVienDao(getContext());
-
+    public void onResume() {
+        super.onResume();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
@@ -70,6 +65,17 @@ QuanLiThanhVien quanLiThanhVien = new QuanLiThanhVien();
         // Create and set the adapter
         thanhVienAdapter = new ThanhVienAdapter(getContext(), thanhVienList);
         recyclerView.setAdapter(thanhVienAdapter);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_quan_li_thanh_vien, container, false);
+        FloatingActionButton floatingActionButton = view.findViewById(R.id.floatingActionButton);
+        recyclerView = view.findViewById(R.id.recyclerView);
+        thanhVienDao = new ThanhVienDao(getContext());
+
+
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +117,7 @@ QuanLiThanhVien quanLiThanhVien = new QuanLiThanhVien();
                 // Insert the ThanhVien object into the database
                 if (thanhVienDao.insertThanhVien(thanhVien) > 0)
                 {
+                    onResume();
                     Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_LONG).show();
                 } else{
                     Toast.makeText(getContext(), "Thêm không thành công", Toast.LENGTH_LONG).show();

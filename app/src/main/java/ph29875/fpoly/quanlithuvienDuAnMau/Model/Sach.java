@@ -4,11 +4,16 @@ public class Sach {
    private int maSach;
     private String tenSach;
     private int giaThue;
-    private int maLoai;
+    private String maLoai;
+    private int soLuong;
 
     public Sach() {
     }
 
+    public Sach(String tensach, int soluong) {
+        this.tenSach = tensach;
+        this.soLuong = soluong;
+    }
     public int getMaSach() {
         return maSach;
     }
@@ -33,11 +38,19 @@ public class Sach {
         this.giaThue = giaThue;
     }
 
-    public int getMaLoai() {
+    public String getMaLoai() {
         return maLoai;
     }
 
-    public void setMaLoai(int maLoai) {
+    public void setMaLoai(String maLoai) {
         this.maLoai = maLoai;
+    }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="180dp"
-    android:background="@android:color/holo_orange_dark">
+    android:background="#673AB7">
 
     <TextView
         android:id="@+id/textView6"
@@ -13,6 +13,6 @@
         android:text="FPT polytechnic"
         android:textSize="20sp"
 
-       />
+        />
 
 </LinearLayout>

@@ -1,14 +1,12 @@
 package ph29875.fpoly.quanlithuvienDuAnMau.Model;
 
-import java.util.Date;
-
 public class PhieuMuon {
    private int maPM;
     private String maTT;
-    private int maTV;
-    private int maSach;
+    private String maTV;
+    private String maSach;
     private int tienThue;
-    private int traSach;
+    private String traSach;
     private String ngay;
 
     public PhieuMuon() {
@@ -30,19 +28,19 @@ public class PhieuMuon {
         this.maTT = maTT;
     }
 
-    public int getMaTV() {
+    public String getMaTV() {
         return maTV;
     }
 
-    public void setMaTV(int maTV) {
+    public void setMaTV(String maTV) {
         this.maTV = maTV;
     }
 
-    public int getMaSach() {
+    public String getMaSach() {
         return maSach;
     }
 
-    public void setMaSach(int maSach) {
+    public void setMaSach(String maSach) {
         this.maSach = maSach;
     }
 
@@ -54,11 +52,11 @@ public class PhieuMuon {
         this.tienThue = tienThue;
     }
 
-    public int getTraSach() {
+    public String getTraSach() {
         return traSach;
     }
 
-    public void setTraSach(int traSach) {
+    public void setTraSach(String traSach) {
         this.traSach = traSach;
     }
 

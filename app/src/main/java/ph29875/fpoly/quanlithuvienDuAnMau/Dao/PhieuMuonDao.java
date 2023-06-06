@@ -70,8 +70,8 @@ public class PhieuMuonDao {
                 PhieuMuon phieuMuon = new PhieuMuon();
                 phieuMuon.setMaPM(cursor.getInt(cursor.getColumnIndex("phieuMuon_id")));
                 phieuMuon.setMaTT(cursor.getString(cursor.getColumnIndex("thuThu_id")));
-                phieuMuon.setMaTV(cursor.getInt(cursor.getColumnIndex("thanhVien_id")));
-                phieuMuon.setMaSach(cursor.getInt(cursor.getColumnIndex("Sach_id")));
+                phieuMuon.setMaTV(cursor.getString(cursor.getColumnIndex("thanhVien_id")));
+                phieuMuon.setMaSach(cursor.getString(cursor.getColumnIndex("Sach_id")));
                 phieuMuon.setTienThue(cursor.getInt(cursor.getColumnIndex("phieuMuon_tienThue")));
                 // Parse the date from the cursor
                 String dateStr = cursor.getString(cursor.getColumnIndex("phieuMuon_ngay"));
@@ -82,7 +82,7 @@ public class PhieuMuonDao {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                phieuMuon.setTraSach(cursor.getInt(cursor.getColumnIndex("phieuMuon_traSach")));
+                phieuMuon.setTraSach(cursor.getString(cursor.getColumnIndex("phieuMuon_traSach")));
 
                 phieuMuonList.add(phieuMuon);
             } while (cursor.moveToNext());
@@ -104,19 +104,21 @@ public class PhieuMuonDao {
             phieuMuon = new PhieuMuon();
             phieuMuon.setMaPM(cursor.getInt(cursor.getColumnIndex("phieuMuon_id")));
             phieuMuon.setMaTT(cursor.getString(cursor.getColumnIndex("thuThu_id")));
-            phieuMuon.setMaTV(cursor.getInt(cursor.getColumnIndex("thanhVien_id")));
-            phieuMuon.setMaSach(cursor.getInt(cursor.getColumnIndex("Sach_id")));
+            phieuMuon.setMaTV(cursor.getString(cursor.getColumnIndex("thanhVien_id")));
+            phieuMuon.setMaSach(cursor.getString(cursor.getColumnIndex("Sach_id")));
             phieuMuon.setTienThue(cursor.getInt(cursor.getColumnIndex("phieuMuon_tienThue")));
+            phieuMuon.setNgay( cursor.getString(cursor.getColumnIndex("phieuMuon_ngay")));
+            phieuMuon.setTraSach(cursor.getString(cursor.getColumnIndex("phieuMuon_traSach")));
             // Parse the date from the cursor
-            String dateStr = cursor.getString(cursor.getColumnIndex("phieuMuon_ngay"));
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-            try {
-                Date date = dateFormat.parse(dateStr);
-                phieuMuon.setNgay(String.valueOf(date));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            phieuMuon.setTraSach(cursor.getInt(cursor.getColumnIndex("phieuMuon_traSach")));
+//            String dateStr = cursor.getString(cursor.getColumnIndex("phieuMuon_ngay"));
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+//            try {
+//                Date date = dateFormat.parse(dateStr);
+//                phieuMuon.setNgay(String.valueOf(date));
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//            phieuMuon.setTraSach(cursor.getString(cursor.getColumnIndex("phieuMuon_traSach")));
         }
         cursor.close();
         return phieuMuon;

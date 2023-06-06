@@ -34,7 +34,7 @@ public class LoaiSachAdapter extends RecyclerView.Adapter<LoaiSachAdapter.LoaiSa
     @Override
     public void onBindViewHolder(@NonNull LoaiSachViewHolder holder, int position) {
         LoaiSach loaiSach = loaiSachList.get(position);
-        holder.tenLoaiTextView.setText(loaiSach.getTenLoai());
+        holder.tenLoaiTextView.setText("Loại Sách: "+ loaiSach.getTenLoai());
     }
 
     @Override

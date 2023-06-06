@@ -35,11 +35,11 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         PhieuMuon phieuMuon = phieuMuonList.get(position);
-        holder.tvMaTV.setText("MaTV: " + phieuMuon.getMaTV());
-        holder.tvMaSach.setText("MaSach: " + phieuMuon.getMaSach());
-        holder.tvTienThue.setText("TienThue: " + phieuMuon.getTienThue());
-        holder.tvNgay.setText("Ngay: " + phieuMuon.getNgay());
-        holder.tvTraSach.setText("TraSach: " + phieuMuon.getTraSach());
+        holder.tvMaTV.setText("Mã thành viên: " + phieuMuon.getMaTV());
+        holder.tvMaSach.setText("Mã sách: " + phieuMuon.getMaSach());
+        holder.tvTienThue.setText("Tiền thuê: " + phieuMuon.getTienThue());
+        holder.tvNgay.setText("Ngày: " + phieuMuon.getNgay());
+        holder.tvTraSach.setText("Trả sách: " + phieuMuon.getTraSach());
     }
 
     @Override

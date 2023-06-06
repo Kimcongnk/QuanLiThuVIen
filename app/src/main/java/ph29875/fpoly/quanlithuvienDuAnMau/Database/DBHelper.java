@@ -1,5 +1,6 @@
 package ph29875.fpoly.quanlithuvienDuAnMau.Database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -55,24 +56,39 @@ public class DBHelper extends SQLiteOpenHelper {
             "thanhVien_id TEXT REFERENCES tbl_thanhVien(thanhVien_id)," +
             "Sach_id INTEGER REFERENCES tbl_Sach(Sach_id)," +
             "phieuMuon_tienThue TEXT NOT NULL," +
-            "phieuMuon_ngay DATE NOT NULL," +
+            "phieuMuon_ngay TEXT NOT NULL," +
             "phieuMuon_traSach INTEGER NOT NULL" +
             ")";
 
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
-        //Thu Thu
+        // Create the tables
         db.execSQL(TABLE_THU_THU_CREATE);
-        //Thanh Vien
         db.execSQL(TABLE_THANH_VIEN_CREATE);
-        //Loai Sach
         db.execSQL(TABLE_LOAI_SACH_CREATE);
-        //Sach
         db.execSQL(TABLE_SACH_CREATE);
-        //Phieu Muon
         db.execSQL(TABLE_PHIEU_MUON_CREATE);
+
+        // Insert hardcoded data into tbl_thuThu
+        insertThuThuData(db);
+    }
+
+    private void insertThuThuData(SQLiteDatabase db) {
+        ContentValues values = new ContentValues();
+        values.put("thuThu_hoTen", "Doe");
+        values.put("thuThu_matKhau", "123");
+        db.insert("tbl_thuThu", null, values);
+
+//        values.clear();
+//        values.put("thuThu_hoTen", "Jane Smith");
+//        values.put("thuThu_matKhau", "abcdef");
+//        db.insert("tbl_thuThu", null, values);
+//
+//        values.clear();
+//        values.put("thuThu_hoTen", "David Johnson");
+//        values.put("thuThu_matKhau", "qwerty");
+//        db.insert("tbl_thuThu", null, values);
     }
 
     @Override

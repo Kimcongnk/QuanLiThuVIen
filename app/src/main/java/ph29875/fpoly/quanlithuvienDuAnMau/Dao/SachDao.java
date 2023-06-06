@@ -55,7 +55,7 @@ private Context context;
             sach.setMaSach(cursor.getInt(cursor.getColumnIndex("Sach_id")));
             sach.setTenSach(cursor.getString(cursor.getColumnIndex("Sach_tenSach")));
             sach.setGiaThue(cursor.getInt(cursor.getColumnIndex("Sach_giaThue")));
-            sach.setMaLoai(cursor.getInt(cursor.getColumnIndex("loaiSach_id")));
+            sach.setMaLoai(cursor.getString(cursor.getColumnIndex("loaiSach_id")));
             sachList.add(sach);
         }
         cursor.close();
@@ -73,7 +73,7 @@ private Context context;
             sach.setMaSach(cursor.getInt(cursor.getColumnIndex("Sach_id")));
             sach.setTenSach(cursor.getString(cursor.getColumnIndex("Sach_tenSach")));
             sach.setGiaThue(cursor.getInt(cursor.getColumnIndex("Sach_giaThue")));
-            sach.setMaLoai(cursor.getInt(cursor.getColumnIndex("loaiSach_id")));
+            sach.setMaLoai(cursor.getString(cursor.getColumnIndex("loaiSach_id")));
         }
         cursor.close();
         return sach;

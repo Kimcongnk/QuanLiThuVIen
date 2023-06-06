@@ -42,6 +42,7 @@
 
             </item>
             <item android:title="Đăng xuất"
+                android:id="@+id/dang_xuat"
                 android:icon="@android:drawable/arrow_down_float"
                 >
 

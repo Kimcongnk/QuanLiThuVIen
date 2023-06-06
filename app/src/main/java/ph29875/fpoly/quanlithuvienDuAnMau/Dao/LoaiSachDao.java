@@ -46,7 +46,7 @@ public class LoaiSachDao {
         Cursor cursor = database.query("tbl_loaiSach", null, null, null, null, null, null);
         while (cursor.moveToNext()) {
             LoaiSach loaiSach = new LoaiSach();
-            loaiSach.setMaLoai(cursor.getString(cursor.getColumnIndex("loaiSach_id")));
+            loaiSach.setMaLoai(cursor.getInt(cursor.getColumnIndex("loaiSach_id")));
             loaiSach.setTenLoai(cursor.getString(cursor.getColumnIndex("loaiSach_tenLoai")));
             loaiSachList.add(loaiSach);
         }
@@ -62,7 +62,7 @@ public class LoaiSachDao {
         LoaiSach loaiSach = null;
         if (cursor.moveToFirst()) {
             loaiSach = new LoaiSach();
-            loaiSach.setMaLoai(cursor.getString(cursor.getColumnIndex("loaiSach_id")));
+            loaiSach.setMaLoai(cursor.getInt(cursor.getColumnIndex("loaiSach_id")));
             loaiSach.setTenLoai(cursor.getString(cursor.getColumnIndex("loaiSach_tenLoai")));
         }
         cursor.close();
