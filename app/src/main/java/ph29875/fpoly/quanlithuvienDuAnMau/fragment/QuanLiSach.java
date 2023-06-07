@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -20,8 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.xml.sax.Parser;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +27,6 @@ import ph29875.fpoly.quanlithuvienDuAnMau.Adapter.SachAdapter;
 import ph29875.fpoly.quanlithuvienDuAnMau.Dao.LoaiSachDao;
 import ph29875.fpoly.quanlithuvienDuAnMau.Dao.SachDao;
 import ph29875.fpoly.quanlithuvienDuAnMau.Model.LoaiSach;
-import ph29875.fpoly.quanlithuvienDuAnMau.Model.PhieuMuon;
 import ph29875.fpoly.quanlithuvienDuAnMau.Model.Sach;
 import ph29875.fpoly.quanlithuvienDuAnMau.R;
 
@@ -71,6 +67,26 @@ QuanLiSach quanLiPhieuMuon = new QuanLiSach();
         // Create and set the adapter
         sachAdapter = new SachAdapter(sachArrayList, getContext());
         recyclerView.setAdapter(sachAdapter);
+
+        sachAdapter.setImageViewClickListener(new PhieuMuonAdapter.ImageViewClickListener() {
+            @Override
+            public void onImageViewClick(int position) {
+                AddUpdateDialog(position);
+            }
+
+            @Override
+            public void xoa(int position) {
+                Sach loaiSach = sachArrayList.get(position);
+                int deletedRows = sachDao.deleteSach((loaiSach.getMaSach()));
+                if (deletedRows > 0) {
+                    sachArrayList.remove(position);
+                     sachAdapter.notifyItemRemoved(position);
+                    Toast.makeText(getContext(), "Xóa Loại Sách thành công", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Xóa Loại Sách thất bại", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -141,5 +157,54 @@ QuanLiSach quanLiPhieuMuon = new QuanLiSach();
         dialog.show();
     }
 
+    public void AddUpdateDialog(int position) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_add_sach, null);
+        dialogBuilder.setView(dialogView);
+
+        EditText editTextTenSach = dialogView.findViewById(R.id.editTextTenSach);
+        EditText editTextGiaThue = dialogView.findViewById(R.id.editTextGiaThue);
+        Spinner spinner = dialogView.findViewById(R.id.editTextMaLoai);
+
+        // Lấy danh sách loại khoản từ database và hiển thị lên Spinner
+        final LoaiSachDao dao = new LoaiSachDao(getContext());
+        final List<LoaiSach> listLoai = dao.getAllLoaiSach();
+        List<String> listTenLoai = new ArrayList<>();
+        for (LoaiSach loai : listLoai) {
+            listTenLoai.add(loai.getTenLoai());
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_spinner_item, listTenLoai);
+        spinner.setAdapter(adapter);
+        dialogBuilder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Sach sach =  sachArrayList.get(position);
+                sach.setTenSach(editTextTenSach.getText().toString());
+                sach.setGiaThue(Integer.parseInt(editTextGiaThue.getText().toString()));
+                int pos = spinner.getSelectedItemPosition();
+                sach.setMaLoai(listLoai.get(pos).getTenLoai());
+                Toast.makeText(getContext(), ""+ sach,Toast.LENGTH_SHORT).show();
+                if (sachDao.updateSach(sach) > 0) {
+                    Toast.makeText(getContext(), "Book added successfully", Toast.LENGTH_SHORT).show();
+                    onResume();
+                    dialog.dismiss();
+                    // Refresh the book list if needed
+                    // refreshBookList();
+                } else {
+                    Toast.makeText(getContext(), "Failed to add book", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        });
+
+        dialogBuilder.setNegativeButton("Cancel", null);
+        AlertDialog dialog = dialogBuilder.create();
+
+        // Show the dialog
+
+        dialog.show();
+    }
 
 }

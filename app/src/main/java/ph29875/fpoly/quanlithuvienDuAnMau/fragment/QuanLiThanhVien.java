@@ -2,7 +2,6 @@ package ph29875.fpoly.quanlithuvienDuAnMau.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import ph29875.fpoly.quanlithuvienDuAnMau.Adapter.PhieuMuonAdapter;
 import ph29875.fpoly.quanlithuvienDuAnMau.Adapter.ThanhVienAdapter;
+import ph29875.fpoly.quanlithuvienDuAnMau.Model.PhieuMuon;
 import ph29875.fpoly.quanlithuvienDuAnMau.Model.ThanhVien;
 import ph29875.fpoly.quanlithuvienDuAnMau.R;
 import ph29875.fpoly.quanlithuvienDuAnMau.Dao.ThanhVienDao;
@@ -64,7 +64,25 @@ QuanLiThanhVien quanLiThanhVien = new QuanLiThanhVien();
 
         // Create and set the adapter
         thanhVienAdapter = new ThanhVienAdapter(getContext(), thanhVienList);
-        recyclerView.setAdapter(thanhVienAdapter);
+        recyclerView.setAdapter(thanhVienAdapter);  thanhVienAdapter.setImageViewClickListener(new ThanhVienAdapter.ImageViewClickListener() {
+            @Override
+            public void onImageViewClick(int position) {
+                updateThanhVien(position);
+            }
+
+            @Override
+            public void xoa(int position) {
+                ThanhVien phieuMuon = thanhVienList.get(position);
+                int deletedRows = thanhVienDao.deleteThanhVien(phieuMuon);
+                if (deletedRows > 0) {
+                    thanhVienList.remove(position);
+                    thanhVienAdapter.notifyItemRemoved(position);
+                    Toast.makeText(getContext(), "PhieuMuon deleted successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Failed to delete PhieuMuon", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -116,6 +134,51 @@ QuanLiThanhVien quanLiThanhVien = new QuanLiThanhVien();
 
                 // Insert the ThanhVien object into the database
                 if (thanhVienDao.insertThanhVien(thanhVien) > 0)
+                {
+                    onResume();
+                    Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_LONG).show();
+                } else{
+                    Toast.makeText(getContext(), "Thêm không thành công", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        dialogBuilder.setNegativeButton("Cancel", null);
+
+        // Show the dialog
+        AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+    }
+
+    public void updateThanhVien(int position) {
+        // Inflate the dialog layout XML file
+        View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_add_thanhvien, null);
+
+        // Find the EditText views in the dialog
+        EditText editTextHoTen = dialogView.findViewById(R.id.editTextHoTen);
+        EditText editTextNamSinh = dialogView.findViewById(R.id.editTextNamSinh);
+
+
+
+        // Build the dialog
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        dialogBuilder.setTitle("Add Member");
+        dialogBuilder.setView(dialogView);
+
+        dialogBuilder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Get the input values
+                ThanhVien thanhVien = thanhVienList.get(position);
+
+                thanhVien.setHoTen(editTextHoTen.getText().toString());
+                thanhVien.setNamSinh(editTextNamSinh.getText().toString());
+
+                // Create a ThanhVien object with the input values
+
+
+                // Insert the ThanhVien object into the database
+                if (thanhVienDao.updateThanhVien(thanhVien) > 0)
                 {
                     onResume();
                     Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_LONG).show();

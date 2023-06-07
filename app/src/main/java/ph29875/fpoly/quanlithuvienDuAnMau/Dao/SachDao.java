@@ -35,7 +35,7 @@ private Context context;
         ContentValues values = new ContentValues();
         values.put("Sach_tenSach", sach.getTenSach());
         values.put("Sach_giaThue", sach.getGiaThue());
-        values.put("maLoai", sach.getMaLoai());
+
         String whereClause = "Sach_id = ?";
         String[] whereArgs = {String.valueOf(sach.getMaSach())};
         return database.update("tbl_Sach", values, whereClause, whereArgs);

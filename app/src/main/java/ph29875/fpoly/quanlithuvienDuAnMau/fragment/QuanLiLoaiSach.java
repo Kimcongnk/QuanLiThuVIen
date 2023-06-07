@@ -18,10 +18,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 import ph29875.fpoly.quanlithuvienDuAnMau.Adapter.LoaiSachAdapter;
-import ph29875.fpoly.quanlithuvienDuAnMau.Adapter.SachAdapter;
+import ph29875.fpoly.quanlithuvienDuAnMau.Adapter.PhieuMuonAdapter;
 import ph29875.fpoly.quanlithuvienDuAnMau.Dao.LoaiSachDao;
 import ph29875.fpoly.quanlithuvienDuAnMau.Model.LoaiSach;
-import ph29875.fpoly.quanlithuvienDuAnMau.Model.Sach;
 import ph29875.fpoly.quanlithuvienDuAnMau.R;
 
 /**
@@ -61,6 +60,26 @@ QuanLiLoaiSach quanLiPhieuMuon = new QuanLiLoaiSach();
         // Create and set the adapter
         loaiSachAdapter = new LoaiSachAdapter(getContext(), loaiSachArrayList);
         recyclerView.setAdapter(loaiSachAdapter);
+
+        loaiSachAdapter.setImageViewClickListener(new LoaiSachAdapter.ImageViewClickListener() {
+            @Override
+            public void onImageViewClick(int position) {
+                showUpdateLoaiSachDialog(position);
+            }
+
+            @Override
+            public void xoa(int position) {
+                LoaiSach loaiSach = loaiSachArrayList.get(position);
+                int deletedRows = loaiSachDao.deleteLoaiSach(String.valueOf(loaiSach.getMaLoai()));
+                if (deletedRows > 0) {
+                    loaiSachArrayList.remove(position);
+                    loaiSachAdapter.notifyItemRemoved(position);
+                    Toast.makeText(getContext(), "Xóa Loại Sách thành công", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Xóa Loại Sách thất bại", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -97,6 +116,42 @@ QuanLiLoaiSach quanLiPhieuMuon = new QuanLiLoaiSach();
                        loaiSach.setTenLoai(tenLoaiEditText.getText().toString());
 
                         if (loaiSachDao.addLoaiSach(loaiSach) > 0) {
+                            onResume();
+                            // Thêm thành công
+                            Toast.makeText(getContext(), "Thêm Loại Sách thành công", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Thêm thất bại
+                            Toast.makeText(getContext(), "Thêm Loại Sách thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void showUpdateLoaiSachDialog(int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_add_loai_sach, null);
+        builder.setView(dialogView);
+
+        EditText tenLoaiEditText = dialogView.findViewById(R.id.tenLoaiEditText);
+
+        builder.setTitle("Thêm Loại Sách")
+                .setPositiveButton("Thêm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        LoaiSach loaiSach = loaiSachArrayList.get(position);
+                        loaiSach.setTenLoai(tenLoaiEditText.getText().toString());
+
+                        if (loaiSachDao.updateLoaiSach(loaiSach) > 0) {
                             onResume();
                             // Thêm thành công
                             Toast.makeText(getContext(), "Thêm Loại Sách thành công", Toast.LENGTH_SHORT).show();

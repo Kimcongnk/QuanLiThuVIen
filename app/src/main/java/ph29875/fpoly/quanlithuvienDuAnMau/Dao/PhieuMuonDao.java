@@ -45,7 +45,6 @@ public class PhieuMuonDao {
 
     public int updatePhieuMuon(PhieuMuon phieuMuon) {
         ContentValues values = new ContentValues();
-        values.put("thuThu_id", phieuMuon.getMaTT());
         values.put("thanhVien_id", phieuMuon.getMaTV());
         values.put("Sach_id", phieuMuon.getMaSach());
         values.put("phieuMuon_tienThue", phieuMuon.getTienThue());
