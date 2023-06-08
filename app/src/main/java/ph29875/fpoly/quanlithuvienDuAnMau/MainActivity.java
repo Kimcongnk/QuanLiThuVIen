@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             drawerLayout.close();
         } else if (id == R.id.doanh_thu) {
-            replaceFragment(ThemNguoiDung.newInstance());
+            replaceFragment(Doanhthu.newInstance());
 
             drawerLayout.close();
         } else if (id == R.id.doi_mat_khau) {

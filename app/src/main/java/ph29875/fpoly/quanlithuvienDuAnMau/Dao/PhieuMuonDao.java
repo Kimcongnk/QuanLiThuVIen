@@ -37,7 +37,7 @@ public class PhieuMuonDao {
         values.put("thanhVien_id", phieuMuon.getMaTV());
         values.put("Sach_id", phieuMuon.getMaSach());
         values.put("phieuMuon_tienThue", phieuMuon.getTienThue());
-        values.put("phieuMuon_ngay", phieuMuon.getNgay().toString());
+        values.put("phieuMuon_ngay", phieuMuon.getNgay());
         values.put("phieuMuon_traSach", phieuMuon.getTraSach());
         open();
         return database.insert("tbl_phieuMuon", null, values);
@@ -48,7 +48,7 @@ public class PhieuMuonDao {
         values.put("thanhVien_id", phieuMuon.getMaTV());
         values.put("Sach_id", phieuMuon.getMaSach());
         values.put("phieuMuon_tienThue", phieuMuon.getTienThue());
-        values.put("phieuMuon_ngay", phieuMuon.getNgay().toString());
+        values.put("phieuMuon_ngay", phieuMuon.getNgay());
         values.put("phieuMuon_traSach", phieuMuon.getTraSach());
         return database.update("tbl_phieuMuon", values, "phieuMuon_id = ?", new String[]{String.valueOf(phieuMuon.getMaPM())});
     }
@@ -72,15 +72,9 @@ public class PhieuMuonDao {
                 phieuMuon.setMaTV(cursor.getString(cursor.getColumnIndex("thanhVien_id")));
                 phieuMuon.setMaSach(cursor.getString(cursor.getColumnIndex("Sach_id")));
                 phieuMuon.setTienThue(cursor.getInt(cursor.getColumnIndex("phieuMuon_tienThue")));
+                phieuMuon.setNgay(cursor.getString(cursor.getColumnIndex("phieuMuon_ngay")));
                 // Parse the date from the cursor
-                String dateStr = cursor.getString(cursor.getColumnIndex("phieuMuon_ngay"));
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-                try {
-                    Date date = dateFormat.parse(dateStr);
-                    phieuMuon.setNgay(String.valueOf(date));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+
                 phieuMuon.setTraSach(cursor.getString(cursor.getColumnIndex("phieuMuon_traSach")));
 
                 phieuMuonList.add(phieuMuon);

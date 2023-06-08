@@ -47,16 +47,19 @@ public class ThongKeDAO {
     @SuppressLint("Range")
     public int getDoanhThu(String tuNgay, String denNgay) {
         String sqlDoanhThu = "SELECT SUM(GiathueS) as doanhThu FROM phieumuon WHERE ngaythue BETWEEN ? AND ?";
-        List<Integer> list = new ArrayList<>();
-        Cursor cursor = db.rawQuery(sqlDoanhThu, new String[]{tuNgay, denNgay});
-        while (cursor.moveToNext()) {
-            try {
-                list.add(Integer.parseInt(cursor.getString(cursor.getColumnIndex("doanhThu"))));
-            } catch (Exception e) {
-                list.add(0);
-            }
+        int doanhThu = 0;
 
+        Cursor cursor = db.rawQuery(sqlDoanhThu, new String[]{tuNgay, denNgay});
+        if (cursor.moveToFirst()) {
+            try {
+                doanhThu = cursor.getInt(cursor.getColumnIndex("doanhThu"));
+            } catch (Exception e) {
+                doanhThu = 0;
+            }
         }
-        return list.get(0);
+        cursor.close();
+
+        return doanhThu;
     }
+
 }
