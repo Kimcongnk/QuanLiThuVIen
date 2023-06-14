@@ -53,18 +53,18 @@ public class Login extends AppCompatActivity {
         luutaikhoan.setChecked(sharedPreferences.getBoolean("REMEMBER", false));
 
 
-//        showpass.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (matkhau.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())) {
-//                    matkhau.setTransformationMethod(PasswordTransformationMethod.getInstance());
-//                    showpass.setImageResource(R.drawable.ic_launcher_foreground);
-//                } else {
-//                    matkhau.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-//                    showpass.setImageResource(android.R.drawable.ic_input_get);
-//                }
-//            }
-//        });
+        showpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (matkhau.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())) {
+                    matkhau.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    showpass.setImageResource(android.R.drawable.ic_menu_view);
+                } else {
+                    matkhau.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    showpass.setImageResource(android.R.drawable.ic_menu_view);
+                }
+            }
+        });
         dangnhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
